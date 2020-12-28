@@ -45,6 +45,8 @@ jobs:
         SHIFTLEFT_ACCESS_TOKEN: ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}
     - name: json2htmltable
       uses: Siddhant-K-code/JSON-to-Table@v1
+    - name: List Findings
+      run: curl --location --request GET 'https://www.shiftleft.io/api/v4/orgs/947dc6c1-7af6-4a15-8469-dc9a0275e16f/apps/GH_Vulnado/findings' --header 'Authorization: Bearer eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2MDgxNTg1OTMsImlzcyI6IlNoaWZ0TGVmdCIsIm9yZ0lEIjoiOTQ3ZGM2YzEtN2FmNi00YTE1LTg0NjktZGM5YTAyNzVlMTZmIiwidXNlcklEIjoiYjE0YzQ4NDctZTllMy00MjIzLWFkOGItNTRkMmRmODNhMTg2Iiwic2NvcGVzIjpbInNlYXRzOndyaXRlIiwiZXh0ZW5kZWQiLCJhcGk6djIiLCJ1cGxvYWRzOndyaXRlIiwibG9nOndyaXRlIiwicGlwZWxpbmVzdGF0dXM6cmVhZCIsIm1ldHJpY3M6d3JpdGUiLCJwb2xpY2llczpjdXN0b21lciJdfQ.oDmeCh4usN0h5qY8zUjgSFkPhZjIIa75gv10ih98jKelsdlD8l8rkqtiFU7uTomK8ZSLjsScQrzEyJWg7zOO2jjyKnHJT_3td-bVhQY29cpTAucWjLK8Tl-5mscdLBLQCgJzH4Pt4NcveF92jwaAoPFIzNXCRbSpozYJtL4wfq6xI-f5wyspMHml-Z8x0fd8czKrdoH2JLs6zxDuUE-HPlQsEgj0wkYwDF7wtx_3ii8SxX9CfRML7QiwxjPdyF4lcSVnxIU8pzzDwVnp8hnudIgZFCekUh6204KdE_D8YPesbFe4fvAd-mw7XYhSQc7kOG4Lax_L6jBmhT_jhQHqWw'
     - name: Create status check
       run: |
         URL="https://www.shiftleft.io/violationlist/ShiftLeftJava?apps=ShiftLeftJava&isApp=1"
