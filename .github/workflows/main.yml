@@ -49,7 +49,7 @@ jobs:
     #  run: curl --location --request GET 'https://www.shiftleft.io/api/v4/orgs/${{ secrets.SHIFTLEFT_ORG_ID }}/apps/GH_Vulnado/findings' --header 'Authorization: Bearer ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}'
     - name: Create status check
       run: |
-        URL="https://www.shiftleft.io/violationlist/ShiftLeftJava?apps=GH_Vulnado&isApp=1"
+        URL="https://www.shiftleft.io/violationlist/GH_Vulnado?apps=GH_Vulnado&isApp=1"
         GH_CHECK_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/check-runs"
         curl -XPOST $GH_CHECK_URL -H "Authorization: Token ${GITHUB_TOKEN}" -H "accept: application/vnd.github.antiope-preview+json" -H "Content-Type: application/json" -d "{\"name\": \"ShiftLeft NG SAST\", \"head_sha\": \"${GITHUB_REF}\", \"external_id\": \"ShiftLeftJava\", \"details_url\": \"${URL}\", \"status\": \"completed\", \"conclusion\": \"action_required\", \"output\": {\"title\": \"ShiftLeft NG SAST Findings\", \"summary\": \"Visit ${URL} for the findings\"}}"
       env:
