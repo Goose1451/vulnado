@@ -58,7 +58,7 @@ jobs:
         # github token
         github-token: ${{ secrets.GITHUB_TOKEN }}
         # html for the table cell
-        html-cell: '<td>{{id}} {{app}} {{type}} {{title}} {{internal_id}} {{severity}} {{owasp_category}} {{category}}</td>'
+        html-cell: '<td>{{ id }} {{ app }} {{ type }} {{ title }} {{ internal_id }} {{ severity }} {{ owasp_category }} {{ category }}</td>'
         # array of object field names from your json objects
         object-field-names: '["id",	"app",	"type",	"title",	"internal_id", "severity",	"owasp_category",	"category"]'
     - name: Create status check
