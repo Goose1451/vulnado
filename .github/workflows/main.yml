@@ -4,7 +4,7 @@ name: Analyze with ShiftLeft NG SAST
 
 on:
   schedule:
-    - cron: "0 * * * *"  
+    - cron: "0 * * */3 *"  
   push: # include to analyze when you push
     branches:
       - master
@@ -46,21 +46,21 @@ jobs:
     - name: List Findings
       run: |
         curl --location --request GET 'https://www.shiftleft.io/api/v4/orgs/${{ secrets.SHIFTLEFT_ORG_ID }}/apps/GH_Vulnado/findings?severity=critical' --header 'Authorization: Bearer ${{ secrets.SHIFTLEFT_ACCESS_TOKEN }}' | jq '[.response.findings[] | {id, app, type, title, internal_id, severity, owasp_category, category}]' >> data.json && cat data.json
-    - name: json2table
-     # You may pin to the exact commit or the version.
-     # uses: EddieJaoudeCommunity/gh-actions-html-table-generator@e20cf6e4fd6c1fbb2f9320cb5bbdc442869a7ed2
-      uses: EddieJaoudeCommunity/gh-actions-html-table-generator@v0.1.1
-      with:
-        # how many columns
-        columns: 8 # optional, default is 2
-        # json file to load
-        json-file-path: data.json # default is data.json
-        # github token
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        # html for the table cell
-        html-cell: '<td>{{ id }} {{ app }} {{ type }} {{ title }} {{ internal_id }} {{ severity }} {{ owasp_category }} {{ category }}</td>'
-        # array of object field names from your json objects
-        object-field-names: '["id",	"app",	"type",	"title",	"internal_id", "severity",	"owasp_category",	"category"]'
+    #- name: json2table
+     ## You may pin to the exact commit or the version.
+     ## uses: EddieJaoudeCommunity/gh-actions-html-table-generator@e20cf6e4fd6c1fbb2f9320cb5bbdc442869a7ed2
+     # uses: EddieJaoudeCommunity/gh-actions-html-table-generator@v0.1.1
+     # with:
+     #   # how many columns
+     #   columns: 8 # optional, default is 2
+     #   # json file to load
+     #   json-file-path: data.json # default is data.json
+     #   # github token
+     #   github-token: ${{ secrets.GITHUB_TOKEN }}
+     #   # html for the table cell
+     #   html-cell: '<td>{{ id }} {{ app }} {{ type }} {{ title }} {{ internal_id }} {{ severity }} {{ owasp_category }} {{ category }}</td>'
+     #   # array of object field names from your json objects
+     #   object-field-names: '["id",	"app",	"type",	"title",	"internal_id", "severity",	"owasp_category",	"category"]'
     - name: Create status check
       run: |
         URL="https://www.shiftleft.io/violationlist/GH_Vulnado?apps=GH_Vulnado&isApp=1"
