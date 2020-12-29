@@ -56,11 +56,11 @@ jobs:
         # json file to load
         json-file-path: data.json # default is data.json
         # github token
-        github-token: ${GITHUB_TOKEN}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
         # html for the table cell
-        html-cell: td
+        html-cell: '<td>{{id}} {{app}} {{type}} {{title}} {{description}} {{internal_id}} {{severity}} {{owasp_category}} {{category}} {{version_first_seen}}</td>'
         # array of object field names from your json objects
-        object-field-names: id	app	type	title	description	internal_id	severity	owasp_category	category	version_first_seen
+        object-field-names: '["id",	"app",	"type",	"title",	"description",	"internal_id",	"severity",	"owasp_category",	"category",	"version_first_seen"]'
     - name: Create status check
       run: |
         URL="https://www.shiftleft.io/violationlist/GH_Vulnado?apps=GH_Vulnado&isApp=1"
